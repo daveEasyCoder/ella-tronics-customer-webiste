@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -17,11 +18,11 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-4">Products</h3>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-white">Earphones</a></li>
-            <li><a href="/" className="hover:text-white">AirPods</a></li>
-            <li><a href="/" className="hover:text-white">Chargers</a></li>
-            <li><a href="/" className="hover:text-white">Cables</a></li>
-            <li><a href="/" className="hover:text-white">Headsets</a></li>
+            <li><Link to="/products" className="hover:text-white">Earphones</Link></li>
+            <li><Link to="/products" className="hover:text-white">AirPods</Link></li>
+            <li><Link to="/products" className="hover:text-white">Chargers</Link></li>
+            <li><Link to="/products" className="hover:text-white">Cables</Link></li>
+            <li><Link to="/products" className="hover:text-white">Headsets</Link></li>
           </ul>
         </div>
 
@@ -29,11 +30,11 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-4">Support</h3>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-white">Help Center</a></li>
-            <li><a href="/" className="hover:text-white">Returns</a></li>
-            <li><a href="/" className="hover:text-white">Shipping</a></li>
-            <li><a href="/" className="hover:text-white">Warranty</a></li>
-            <li><a href="/" className="hover:text-white">Contact Us</a></li>
+            <li>Help Center</li>
+            <li>Returns</li>
+            <li>Shipping</li>
+            <li>Warranty</li>
+            <li>Contact Us</li>
           </ul>
         </div>
 

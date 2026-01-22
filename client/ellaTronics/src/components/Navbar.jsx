@@ -32,8 +32,9 @@ const Navbar = () => {
                     onClick={() => navigate('/')} 
                     className="cursor-pointer"
                 >
-                    <p className='text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors'>
-                        Ella-Tronics
+                    <p className=''>
+                         <span className='text-2xl'>⚡</span>
+                         <span className='logo text-xl font-bold text-cyan-500'>Ella-Tronics</span>
                     </p>
                 </div>
 

@@ -7,12 +7,12 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      titlePart1: "Power Your",
-      titlePart2: "World with",
-      titlePart3: "Smart Electronics",
+      titlePart1: "Ella Tronics",
+      titlePart2: "Powering",
+      titlePart3: "Your Digital Life",
       description: "Discover premium earphones, AirPods, chargers, cables, and headsets built for speed, sound, and style — all in one place.",
       buttonText: "Browse Products",
-      image: "/bg.avif"
+      image: "/bg1.png"
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ const Hero = () => {
       titlePart3: "Latest Tech",
       description: "Experience true wireless freedom with our cutting-edge AirPods and Bluetooth devices. No cords, no limits.",
       buttonText: "Explore Wireless",
-      image: "/wireless.avif"
+      image: "/bg4.avif"
     }
   ];
 
@@ -48,9 +48,6 @@ const Hero = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   }, [slides.length]);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
 
   // Auto slide every 5 seconds
   useEffect(() => {
@@ -81,12 +78,12 @@ const Hero = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/40 to-black/60"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-black/50 via-black/40 to-black/50"></div>
             </div>
 
             {/* Text content */}
             <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-6">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-fadeIn">
+              <h1 className="exo-texts text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-fadeIn">
                 <span className='text-cyan-400'>{slide.titlePart1}</span> {slide.titlePart2} <br /> {slide.titlePart3}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-white mb-8 drop-shadow-md max-w-2xl animate-slideUp">
@@ -95,7 +92,7 @@ const Hero = () => {
               <div className="flex gap-4 flex-wrap justify-center animate-slideUp">
                 <Link
                   to="/products"
-                  className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-105 text-lg"
+                  className="border border-white text-white px-8 py-3 rounded-lg hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-105 text-lg"
                 >
                   {slide.buttonText}
                 </Link>

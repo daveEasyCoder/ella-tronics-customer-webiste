@@ -12,7 +12,7 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
   
   // Filter states
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 10000]);
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [selectedColor, setSelectedColor] = useState('all');
@@ -43,6 +43,9 @@ const ProductPage = () => {
     }
   };
 
+  useEffect(() => {
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[selectedColor,selectedStatus])
   // Apply filters
   useEffect(() => {
     let filtered = [...products];
@@ -177,7 +180,7 @@ const ProductPage = () => {
                 />
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
                   <span>Birr 0</span>
-                  <span>Birr 100,000</span>
+                  <span>Birr 10,000</span>
                 </div>
               </div>
 
@@ -226,7 +229,7 @@ const ProductPage = () => {
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color.toLowerCase())}
-                      className={`px-3 py-2 rounded-lg transition ${selectedColor === color.toLowerCase()
+                      className={`px-3 py-2 cursor-pointer rounded-lg transition ${selectedColor === color.toLowerCase()
                           ? 'bg-blue-100 text-blue-700 border-2 border-blue-500'
                           : 'hover:bg-gray-100 text-gray-700 border border-gray-300'
                         }`}

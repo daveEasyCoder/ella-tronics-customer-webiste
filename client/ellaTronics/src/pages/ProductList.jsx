@@ -119,7 +119,7 @@ const ProductList = () => {
                     <div className="inline-flex items-center justify-center p-3 bg-linear-to-r from-blue-100 to-indigo-100 rounded-2xl mb-4">
                         <TrendingUp className="h-8 w-8 text-blue-600" />
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+                    <h1 className=" text-4xl md:text-5xl font-bold text-gray-900 mb-3">
                         Discover Amazing Products
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
