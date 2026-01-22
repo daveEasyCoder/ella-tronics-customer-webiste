@@ -6,22 +6,9 @@ import { useNavigate } from "react-router-dom";
 const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
-  const BASE_URL = "http://localhost:3004";
+  const BASE_URL = "https://ella-tronics-backend.onrender.com";
 
 
-//   const handleLogout = async () => {
-//     try {
-//       const response = await axios.post(`${BASE_URL}/api/users/logout`, {
-//         withCredentials: true
-//       });
-//       if (response.data.success) {
-//         navigate("/login")
-//       }
-//     } catch (error) {
-//       console.log(error);
-
-//     }
-//   }
 
   return (
     <ApiContext.Provider value={{ BASE_URL }}>
