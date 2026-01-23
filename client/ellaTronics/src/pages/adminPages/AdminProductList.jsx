@@ -19,9 +19,8 @@ import { useProductContext } from '../../context/ProductContext';
 
 const AdminProductList = () => {
 
-  const { BASE_URL } = useProductContext()
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const { BASE_URL, adminProducts, setAdminProducts, filteredProducts, setFilteredProducts } = useProductContext()
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -30,9 +29,13 @@ const AdminProductList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
+  const [statusLoading, setStatusLoading] = useState(false);
+  const [changingStatusId, setChangingStatusId] = useState(null);
+
   const navigate = useNavigate();
 
   // Fetch all products
+
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -40,9 +43,11 @@ const AdminProductList = () => {
       const response = await axios.get(`${BASE_URL}/api/products/admin-get-all-products`, { withCredentials: true });
 
       if (response.data.success) {
-        setProducts(response.data.data);
+        setAdminProducts(response.data.data);
         setFilteredProducts(response.data.data);
+        localStorage.setItem("adminProducts", JSON.stringify(response.data.data));
       }
+
     } catch (err) {
       console.error('Error fetching products:', err);
       if (err.response) {
@@ -62,14 +67,21 @@ const AdminProductList = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
-    fetchProducts();
+
+    const storedAdminProducts = localStorage.getItem("adminProducts");
+    if (storedAdminProducts) {
+      setAdminProducts(JSON.parse(storedAdminProducts));
+      setFilteredProducts(JSON.parse(storedAdminProducts));
+      setLoading(false);
+    } else {
+      fetchProducts();
+    }
   }, []);
 
   // Apply filters and search
   useEffect(() => {
-    let result = products;
+    let result = adminProducts;
 
     // Apply search filter
     if (searchTerm) {
@@ -98,7 +110,7 @@ const AdminProductList = () => {
     }
 
     setFilteredProducts(result);
-  }, [products, searchTerm, statusFilter, sortConfig]);
+  }, [adminProducts, searchTerm, statusFilter, sortConfig]);
 
 
 
@@ -115,8 +127,11 @@ const AdminProductList = () => {
   const handleDeleteProduct = async (id) => {
     try {
       setLoading(true);
+      setError('');
       await axios.delete(`${BASE_URL}/api/products/delete-product/${id}`, { withCredentials: true });
-      setProducts(products.filter(product => product._id !== id));
+      const updatedProduct = adminProducts.filter(product => product._id !== id)
+      setAdminProducts(updatedProduct);
+      localStorage.setItem("adminProducts", JSON.stringify(updatedProduct));
       setProductToDelete(null);
       setShowDeleteModal(false);
     } catch (err) {
@@ -138,10 +153,16 @@ const AdminProductList = () => {
   // Update product status
   const updateProductStatus = async (id, newStatus) => {
     try {
-      await axios.put(`${BASE_URL}/api/products/edit-product/${id}`, { status: newStatus }, { withCredentials: true });
-      setProducts(products.map(product =>
-        product._id === id ? { ...product, status: newStatus } : product
-      ));
+      setStatusLoading(true);
+      setChangingStatusId(id)
+      const response = await axios.put(`${BASE_URL}/api/products/edit-product/${id}`, { status: newStatus }, { withCredentials: true });
+      if (response.data.success) {
+        setAdminProducts(adminProducts.map(product =>
+          product._id === id ? { ...product, status: newStatus } : product
+        ));
+        localStorage.setItem("adminProducts", JSON.stringify(response.data.data))
+      }
+
     } catch (err) {
       console.error('Error updating status:', err);
       if (err.response) {
@@ -153,8 +174,18 @@ const AdminProductList = () => {
       } else {
         setError('Failed to update product status.');
       }
+    } finally {
+      setStatusLoading(false);
     }
   };
+
+
+
+  const refreshAdminProducts = () => {
+    localStorage.removeItem("adminProducts");
+    fetchProducts();
+  };
+
 
   // Table headers - REMOVED Date Added column
   const tableHeaders = [
@@ -166,7 +197,7 @@ const AdminProductList = () => {
     { key: 'actions', label: 'Actions', width: 'w-48', sortable: false }
   ];
 
-  if (loading && products.length === 0) {
+  if (loading && adminProducts.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 p-6 ml-0 sm:ml-55">
         <div className="max-w-7xl mx-auto">
@@ -202,11 +233,12 @@ const AdminProductList = () => {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
               <p className="text-gray-600 mt-1">
-                {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} • Total value: {(products.reduce((sum, p) => sum + p.price, 0))}
+                {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} • Total value: {(adminProducts?.reduce((sum, p) => sum + p.price, 0))}
               </p>
             </div>
 
             <div className="flex items-center gap-3">
+              <button className='border border-blue-700 px-5 py-2 cursor-pointer text-gray-700 rounded' onClick={ refreshAdminProducts}>Refresh</button>
               <Link
                 to="/admin/create-product"
                 className="px-4 py-2.5 bg-linear-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 flex items-center gap-2 font-medium"
@@ -379,30 +411,34 @@ const AdminProductList = () => {
 
                   {/* Status */}
                   <div className="w-full md:w-32 px-0 md:px-3">
-                    <button
-                      onClick={() =>
-                        updateProductStatus(
-                          product._id,
-                          product.status === "available" ? "sold" : "available"
-                        )
-                      }
-                      className={`inline-flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${product.status === "available"
-                          ? "bg-green-100 text-green-800 hover:bg-green-200"
-                          : "bg-red-100 text-red-800 hover:bg-red-200"
-                        }`}
-                    >
-                      {product.status === "available" ? (
-                        <>
-                          <CheckCircle className="h-4 w-4" />
-                          Available
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="h-4 w-4" />
-                          Sold
-                        </>
-                      )}
-                    </button>
+                    {
+                      statusLoading && changingStatusId === product._id ? <span className='text-sm'>loading...</span> :
+                        <button
+                          onClick={() =>
+                            updateProductStatus(
+                              product._id,
+                              product.status === "available" ? "sold" : "available"
+                            )
+                          }
+                          className={`inline-flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${product.status === "available"
+                            ? "bg-green-100 text-green-800 hover:bg-green-200"
+                            : "bg-red-100 text-red-800 hover:bg-red-200"
+                            }`}
+                        >
+                          {product.status === "available" ? (
+                            <>
+                              <CheckCircle className="h-4 w-4" />
+                              Available
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="h-4 w-4" />
+                              Sold
+                            </>
+                          )}
+                        </button>
+                    }
+
                   </div>
 
                   {/* Actions */}
@@ -479,27 +515,27 @@ const AdminProductList = () => {
         {/* Stats Summary */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-linear-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
-            <div className="text-2xl font-bold">{products.length}</div>
+            <div className="text-2xl font-bold">{adminProducts?.length}</div>
             <div className="text-blue-100">Total Products</div>
           </div>
 
           <div className="bg-linear-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg">
             <div className="text-2xl font-bold">
-              {products.filter(p => p.status === 'available').length}
+              {adminProducts?.filter(p => p.status === 'available').length}
             </div>
             <div className="text-green-100">Available</div>
           </div>
 
           <div className="bg-linear-to-br from-red-500 to-red-600 text-white p-6 rounded-xl shadow-lg">
             <div className="text-2xl font-bold">
-              {products.filter(p => p.status === 'sold').length}
+              {adminProducts?.filter(p => p.status === 'sold').length}
             </div>
             <div className="text-red-100">Sold</div>
           </div>
 
           <div className="bg-linear-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl shadow-lg">
             <div className="text-2xl font-bold">
-              {(products.reduce((sum, p) => sum + p.price, 0))}
+              {(adminProducts?.reduce((sum, p) => sum + p.price, 0))}
             </div>
             <div className="text-purple-100">Total Value</div>
           </div>
@@ -538,6 +574,7 @@ const AdminProductList = () => {
                 Delete Product
               </button>
             </div>
+            <p className='text-red-500 text-sm ml-2 mt-2'> {error && error}</p>
           </div>
         </div>
       )}

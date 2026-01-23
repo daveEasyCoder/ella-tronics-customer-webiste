@@ -66,11 +66,13 @@ export const createProduct = async (req, res) => {
     });
 
     await product.save();
+    const newProduct = await Product.find().sort({ createdAt: -1 }).select('-__v');
 
     res.status(201).json({
       success: true,
       message: "Product created successfully",
-      data: product
+      data: newProduct
+
     });
 
   } catch (error) {
@@ -107,7 +109,7 @@ export const getSingleProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({
         success: false,
-        message: "Product not found"
+        message: "Product not found in Store"
       });
     }
 
@@ -184,7 +186,7 @@ export const editProduct = async (req, res) => {
       }
       return res.status(404).json({
         success: false,
-        message: "Product not found"
+        message: "Product not found in Store"
       });
     }
 
@@ -220,11 +222,12 @@ export const editProduct = async (req, res) => {
       updatedFields,
       { new: true, runValidators: true }
     );
-
+    const newProduct =  await Product.find().sort({ createdAt: -1 }).select('-__v'); 
     res.status(200).json({
       success: true,
       message: "Product updated successfully",
-      data: updatedProduct
+      data: newProduct,
+      updatedProduct
     });
 
   } catch (error) {
@@ -260,7 +263,7 @@ export const deleteProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({
         success: false,
-        message: "Product not found"
+        message: "Product not found in Store"
       });
     }
 

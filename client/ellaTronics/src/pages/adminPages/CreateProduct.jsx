@@ -132,6 +132,7 @@ const CreateProduct = () => {
                 setImage(null);
                 setImagePreview('');
                 setUploadProgress(0);
+                localStorage.setItem("adminProducts",JSON.stringify(response.data.data))
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 // Auto-hide success message after 5 seconds
                 setTimeout(() => {

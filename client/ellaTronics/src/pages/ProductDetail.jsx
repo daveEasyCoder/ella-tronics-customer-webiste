@@ -223,6 +223,7 @@ const ProductDetail = () => {
                                     src={activeImage}
                                     alt={product.name}
                                     className="w-full h-full object-contain p-8"
+                                     loading="lazy"
                                     onError={(e) => {
                                         e.target.src = 'https://via.placeholder.com/800x600/4F46E5/FFFFFF?text=Product+Image';
                                         e.target.className = 'w-full h-full object-cover';

@@ -53,7 +53,16 @@ const AdminProductDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (id) {
+    const storedProducts = JSON.parse(localStorage.getItem("adminProducts"));
+    if (storedProducts) {
+      const prod = storedProducts.find(p => p._id === id);
+      if (prod) {
+        setProduct(prod);
+        setLoading(false);
+      } else {
+        fetchProductDetails();
+      }
+    } else {
       fetchProductDetails();
     }
   }, [id]);

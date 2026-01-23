@@ -37,8 +37,8 @@ const AdminDashboard = () => {
             setError('');
 
             const [statsResponse, activitiesResponse] = await Promise.all([
-                axios.get(`${BASE_URL}/api/admin/dashboard-stats`,{withCredentials:true}),
-                axios.get(`${BASE_URL}/api/admin/dashboard-activities`,{withCredentials:true})
+                axios.get(`${BASE_URL}/api/admin/dashboard-stats`, { withCredentials: true }),
+                axios.get(`${BASE_URL}/api/admin/dashboard-activities`, { withCredentials: true })
             ]);
 
             if (statsResponse.data.success) {
@@ -70,8 +70,10 @@ const AdminDashboard = () => {
         }
     };
 
+
+
     useEffect(() => {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         fetchDashboardData();
     }, []);
 
@@ -189,7 +191,7 @@ const AdminDashboard = () => {
                         </div>
                         <div className="text-gray-600 font-medium">Total Inventory Value</div>
                         <div className="text-sm text-gray-500 mt-2">
-                            Avg: {stats?.summary?.averagePrice || 0} ETB
+                            Avg: {stats?.summary?.averagePrice?.toFixed(2) || 0} ETB
                         </div>
                     </div>
 

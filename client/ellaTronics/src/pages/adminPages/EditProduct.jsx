@@ -21,7 +21,7 @@ import { useProductContext } from '../../context/ProductContext';
 const EditProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { BASE_URL } = useProductContext();
+  const { BASE_URL,setAdminProducts } = useProductContext();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -73,9 +73,34 @@ const EditProduct = () => {
     }
   };
 
+
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (id) {
+    
+    const storedAdminProducts = localStorage.getItem("adminProducts");
+    if (storedAdminProducts) {
+      const products = JSON.parse(storedAdminProducts);
+      const product = products.find(p => p._id === id);
+      if (product) {
+        setFormData({
+          name: product.name || '',
+          price: product.price || '',
+          description: product.description || '',
+          color: product.color || '',
+          location: product.location || '',
+          contact1: product.contact1 || '',
+          contact2: product.contact2 || '',
+          telegram: product.telegram || '',
+          status: product.status || 'available'
+        });
+        setImagePreview(product.image || '');
+        setLoading(false)
+      }else{
+        fetchProductData();
+      }
+    }else{
       fetchProductData();
     }
   }, [id]);
@@ -165,13 +190,15 @@ const EditProduct = () => {
       );
 
       if (response.data.success) {
+        setAdminProducts(response.data.data);
+        localStorage.setItem("adminProducts", JSON.stringify(response.data.data));
         setSuccess('Product updated successfully!');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } catch (err) {
       console.error('Error updating product:', err);
       if (err.response) {
-        if(err.response.status === 401 || err.response.status ===403){
+        if (err.response.status === 401 || err.response.status === 403) {
           navigate('/admin-login');
           return;
         }

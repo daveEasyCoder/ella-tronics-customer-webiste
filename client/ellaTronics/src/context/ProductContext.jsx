@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const ApiContext = createContext();
 
@@ -12,9 +11,14 @@ export const ApiProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [products, setProducts] = useState([]);
+  const [adminProducts, setAdminProducts] = useState([]);
+   const [filteredProducts, setFilteredProducts] = useState([]);
+
+
 
   // Fetch all products
   const fetchProducts = async () => {
+   
     try {
       setLoading(true);
       setError('');
@@ -40,7 +44,7 @@ export const ApiProvider = ({ children }) => {
 
 
   return (
-    <ApiContext.Provider value={{ BASE_URL, products, loading, error }}>
+    <ApiContext.Provider value={{ BASE_URL, products, loading, error,adminProducts,setAdminProducts,filteredProducts,setFilteredProducts, fetchProducts }}>
       {children}
     </ApiContext.Provider>
   );
