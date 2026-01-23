@@ -113,7 +113,7 @@ const AdminDashboard = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 md:p-6 ml-17 sm:ml-55 mt-14 pb-15">
+        <div className="min-h-screen bg-gray-50 p-4 md:p-6 ml-0 sm:ml-55 mt-14 pb-15">
             <div className="max-w-7xl">
                 {/* Header */}
                 <div className="mb-8">

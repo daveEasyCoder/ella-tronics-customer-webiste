@@ -118,7 +118,7 @@ const AdminProductDetail = () => {
 
   if (error || !product) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 ml-17 sm:ml-55">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 sm:ml-55">
         <div className="text-center max-w-md">
           <div className="text-red-500 text-6xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Product Not Found</h2>
@@ -136,7 +136,7 @@ const AdminProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 ml-17 sm:ml-55 mt-14">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 sm:ml-55 mt-14">
       <div className="max-w-7xl mx-auto">
         {/* Header with Actions */}
         <div className="mb-8">

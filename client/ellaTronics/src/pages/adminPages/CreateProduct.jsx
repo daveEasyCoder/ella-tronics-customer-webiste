@@ -182,7 +182,7 @@ const CreateProduct = () => {
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-8 px-4 ml-17 sm:ml-55 pt-20 pb-15">
+        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-8 px-4 sm:ml-55 pt-20 pb-15">
             <div className="max-w-4xl">
                 {/* Header */}
                 <div className="text-center mb-10">

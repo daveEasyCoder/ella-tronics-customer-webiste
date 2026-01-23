@@ -168,7 +168,7 @@ const AdminProductList = () => {
 
   if (loading && products.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 p-6 ml-17 sm:ml-55">
+      <div className="min-h-screen bg-gray-50 p-6 ml-0 sm:ml-55">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-gray-300 rounded w-64 mb-8"></div>
@@ -194,7 +194,7 @@ const AdminProductList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 ml-17 sm:ml-55 mt-14 pb-15">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 ml-0 sm:ml-55 mt-14 pb-15">
       <div className="max-w-7xl">
         {/* Header */}
         <div className="mb-8">

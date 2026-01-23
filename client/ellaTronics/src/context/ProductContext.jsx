@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
-  const BASE_URL = "https://ella-tronics-backend.onrender.com";
+  const production_url = "https://ella-tronics-backend.onrender.com";
+  const development_url = "http://localhost:3004";
+  const BASE_URL = production_url
 
 
 
