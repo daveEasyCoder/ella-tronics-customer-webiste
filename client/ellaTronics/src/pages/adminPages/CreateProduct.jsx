@@ -154,7 +154,7 @@ const CreateProduct = () => {
                 );
 
             } else {
-                setError('Server not responding! Please try again later.');
+                setError('Connection problem! Please try again later.');
             }
 
         } finally {
