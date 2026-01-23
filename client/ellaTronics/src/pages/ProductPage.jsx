@@ -5,12 +5,12 @@ import { useProductContext } from '../context/ProductContext';
 
 const ProductPage = () => {
 
-  const {BASE_URL} = useProductContext()
+  const { BASE_URL } = useProductContext()
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Filter states
   const [priceRange, setPriceRange] = useState([0, 10000]);
   const [selectedLocation, setSelectedLocation] = useState('all');
@@ -20,13 +20,21 @@ const ProductPage = () => {
 
   // Sample data for filters (you can replace with actual data from API)
   const locations = ['All', 'AASTU', 'woliso', 'ASTU'];
-  const colors = ['All', 'Black', 'White', 'Blue', 'Red', 'Gray', 'Gold','Green'];
+  const colors = ['All', 'Black', 'White', 'Blue', 'Red', 'Gray', 'Gold', 'Green'];
   const statuses = ['All', 'Available', 'Sold'];
 
   // Fetch products
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchProducts();
+    const storedProducts = localStorage.getItem('products');
+    if (storedProducts) {
+      const parsedProducts = JSON.parse(storedProducts);
+      setProducts(parsedProducts || []);
+      setFilteredProducts(parsedProducts || []);
+      setLoading(false);
+    } else {
+      fetchProducts();
+    }
   }, []);
 
   const fetchProducts = async () => {
@@ -44,8 +52,8 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-     window.scrollTo({ top: 0, behavior: 'smooth' });
-  },[selectedColor,selectedStatus])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedColor, selectedStatus])
   // Apply filters
   useEffect(() => {
     let filtered = [...products];
@@ -110,7 +118,7 @@ const ProductPage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-500 text-xl mb-4">⚠️ {error}</div>
-          <button 
+          <button
             onClick={fetchProducts}
             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
           >
@@ -209,10 +217,10 @@ const ProductPage = () => {
                       key={status}
                       onClick={() => setSelectedStatus(status.toLowerCase())}
                       className={`px-3 py-2 rounded-lg transition ${selectedStatus === status.toLowerCase()
-                          ? status === 'Available'
-                            ? 'bg-green-100 text-green-700 border border-green-300'
-                            : 'bg-red-100 text-red-700 border border-red-300'
-                          : 'hover:bg-gray-100 text-gray-700 border border-gray-300'
+                        ? status === 'Available'
+                          ? 'bg-green-100 text-green-700 border border-green-300'
+                          : 'bg-red-100 text-red-700 border border-red-300'
+                        : 'hover:bg-gray-100 text-gray-700 border border-gray-300'
                         }`}
                     >
                       {status}
@@ -230,8 +238,8 @@ const ProductPage = () => {
                       key={color}
                       onClick={() => setSelectedColor(color.toLowerCase())}
                       className={`px-3 py-2 cursor-pointer rounded-lg transition ${selectedColor === color.toLowerCase()
-                          ? 'bg-blue-100 text-blue-700 border-2 border-blue-500'
-                          : 'hover:bg-gray-100 text-gray-700 border border-gray-300'
+                        ? 'bg-blue-100 text-blue-700 border-2 border-blue-500'
+                        : 'hover:bg-gray-100 text-gray-700 border border-gray-300'
                         }`}
                     >
                       {color}
@@ -288,8 +296,8 @@ const ProductPage = () => {
                       />
                       {/* Status Badge */}
                       <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold ${product.status === 'available'
-                          ? 'bg-green-500 text-white'
-                          : 'bg-red-500 text-white'
+                        ? 'bg-green-500 text-white'
+                        : 'bg-red-500 text-white'
                         }`}>
                         {product.status === 'available' ? 'Available' : 'Sold'}
                       </div>

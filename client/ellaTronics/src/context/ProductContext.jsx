@@ -9,11 +9,38 @@ export const ApiProvider = ({ children }) => {
   const production_url = "https://ella-tronics-backend.onrender.com";
   const development_url = "http://localhost:3004";
   const BASE_URL = production_url
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [products, setProducts] = useState([]);
 
+  // Fetch all products
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await axios.get(`${BASE_URL}/api/products/get-all-products`);
+
+      if (response.data.success) {
+        setProducts(response.data.data);
+        localStorage.setItem("products", JSON.stringify(response.data.data));
+      }
+    } catch (err) {
+      console.error('Error fetching products:', err);
+      setError('Failed to load products. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
 
   return (
-    <ApiContext.Provider value={{ BASE_URL }}>
+    <ApiContext.Provider value={{ BASE_URL, products, loading, error }}>
       {children}
     </ApiContext.Provider>
   );

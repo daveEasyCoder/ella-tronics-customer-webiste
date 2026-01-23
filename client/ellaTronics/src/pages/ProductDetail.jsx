@@ -12,11 +12,9 @@ import {
     Tag,
     CheckCircle,
     Shield,
-    Star,
     Share2,
     Heart,
     AlertCircle,
-    DollarSign,
     Palette,
     FileText,
     Globe,
@@ -38,7 +36,28 @@ const ProductDetail = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [copied, setCopied] = useState(false);
     const [copiedText, setCopiedText] = useState("");
-    
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const storedProducts = localStorage.getItem("products");
+     
+        if (storedProducts) {
+            setLoading(true)
+            const products = JSON.parse(storedProducts);
+
+            const foundProduct = products.find(p => p._id === id);
+
+            if (foundProduct) {
+                setProduct(foundProduct);
+                setActiveImage(foundProduct.image);
+                setLoading(false)
+            } else {
+               fetchProductDetails()
+            }
+        }else{
+            fetchProductDetails()
+        }
+    }, [id]);
 
     // Fetch product details
     const fetchProductDetails = async () => {
@@ -59,12 +78,6 @@ const ProductDetail = () => {
         }
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        if (id) {
-            fetchProductDetails();
-        }
-    }, [id]);
 
 
 

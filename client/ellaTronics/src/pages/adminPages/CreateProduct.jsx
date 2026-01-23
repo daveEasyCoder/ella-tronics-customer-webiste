@@ -147,11 +147,7 @@ const CreateProduct = () => {
                     return;
                 }
 
-                setError(
-                    err.response?.data?.message ||
-                    err.response?.data?.error ||
-                    'Failed to create product. Please try again.'
-                );
+                setError(err.response?.data?.message || 'Failed to create product. Please try again.');
 
             } else {
                 setError('Connection problem! Please try again later.');

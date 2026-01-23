@@ -5,43 +5,17 @@ import {
     MapPin,
     Eye,
     Calendar,
-    Tag,
     Shield,
     TrendingUp,
-    DollarSign,
     Package
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProductContext } from '../context/ProductContext';
 
 const ProductList = () => {
-    const { BASE_URL } = useProductContext();
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const { products,loading,error } = useProductContext();
 
-    // Fetch all products
-    const fetchProducts = async () => {
-        try {
-            setLoading(true);
-            setError('');
-            const response = await axios.get(`${BASE_URL}/api/products/get-all-products`);
 
-            if (response.data.success) {
-                const slicedProduct = response.data.data.slice(0,4)
-                setProducts(slicedProduct);
-            }
-        } catch (err) {
-            console.error('Error fetching products:', err);
-            setError('Failed to load products. Please try again later.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
 
     // Format date
@@ -139,7 +113,7 @@ const ProductList = () => {
 
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {products.map((product) => (
+                    {products?.slice(0, 8).map((product) => (
                         <div
                             key={product._id}
                             className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-100"
