@@ -24,24 +24,24 @@ const Navbar = () => {
     }
 
     return (
-        <div className="text-sm text-gray-900 w-full">
+        <div className="text-sm text-gray-900  bg-red-500 w-full">
             <nav className="relative h-16 md:h-17.5 flex items-center justify-between px-6 py-4 bg-white shadow-md transition-all">
-                
+
                 {/* Logo */}
-                <div 
-                    onClick={() => navigate('/')} 
+                <div
+                    onClick={() => navigate('/')}
                     className="cursor-pointer"
                 >
                     <p className=''>
-                         <span className='text-2xl'>⚡</span>
-                         <span className='logo text-xl font-bold text-cyan-500'>Ella-Tronics</span>
+                        <span className='text-2xl'>⚡</span>
+                        <span className='logo text-xl font-bold text-cyan-500'>Ella-Tronics</span>
                     </p>
                 </div>
 
                 {/* Desktop Navigation */}
                 <ul className="hidden md:flex items-center space-x-10 md:pl-28">
                     <li>
-                        <div 
+                        <div
                             onClick={() => navigate('/')}
                             className="cursor-pointer flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
                         >
@@ -52,8 +52,8 @@ const Navbar = () => {
                         </div>
                     </li>
                     <li>
-                        <Link 
-                            to="/products" 
+                        <Link
+                            to="/products"
                             className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -63,8 +63,8 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link 
-                            to="/login" 
+                        <Link
+                            to="/login"
                             className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -79,30 +79,30 @@ const Navbar = () => {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={toggleMenu}
-                    className="md:hidden p-2 cursor-pointer rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="md:hidden p-2 relative z-40 cursor-pointer rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     aria-label="Toggle menu"
                 >
-                    {isMenuOpen ? (
-                        // Close Icon
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    ) : (
-                        // Hamburger Icon
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    )}
+                     {/* Hamburger Icon */}
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
                 </button>
 
                 {/* Mobile Menu */}
                 <div className={`
-                    absolute top-16 left-0 w-full h-[80vh] bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+                    fixed top-0 left-0 bg-white w-full h-screen  shadow-lg transform transition-transform duration-300 ease-in-out
                     ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
                     md:hidden z-50
                 `}>
-                    <div className="flex flex-col space-y-6 p-6 pt-10">
-                        <div 
+                    <div className="flex pt-6 flex-col space-y-6 p-6">
+                        <div className='text-end'>
+                            <button onClick={toggleMenu} className='cursor-pointer p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500'>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div
                             onClick={() => handleNavigation('/')}
                             className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
                         >
@@ -111,9 +111,9 @@ const Navbar = () => {
                             </svg>
                             <span className="text-lg font-medium">Home</span>
                         </div>
-                        
-                        <Link 
-                            to="/products" 
+
+                        <Link
+                            to="/products"
                             onClick={closeMenu}
                             className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
                         >
@@ -122,9 +122,9 @@ const Navbar = () => {
                             </svg>
                             <span className="text-lg font-medium">Products</span>
                         </Link>
-                        
-                        <Link 
-                            to="/login" 
+
+                        <Link
+                            to="/login"
                             onClick={closeMenu}
                             className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
                         >
@@ -136,6 +136,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                 </div>
+
             </nav>
         </div>
     )

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { useProductContext } from '../context/ProductContext';
 
 const ProductList = () => {
-    const { products,loading,error } = useProductContext();
+    const { products, loading, error } = useProductContext();
 
 
 
@@ -91,7 +91,7 @@ const ProductList = () => {
                     <div className="inline-flex items-center justify-center p-3 bg-linear-to-r from-blue-100 to-indigo-100 rounded-2xl mb-4">
                         <TrendingUp className="h-8 w-8 text-blue-600" />
                     </div>
-                    <h1 className=" text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+                    <h1 className=" text-3xl md:text-5xl font-bold text-gray-900 mb-3">
                         Discover Amazing Products
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -124,10 +124,8 @@ const ProductList = () => {
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     loading="lazy"
                                     onError={(e) => {
-                                        console.error('Image failed to load for:', product.name);
-                                        console.error('Image URL:', product.image);
-                                        e.target.src = 'https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Product+Image';
-                                        e.target.onerror = null; // Prevent infinite loop
+                                        e.target.src =
+                                            "/imageNotFound.png";
                                     }}
                                 />
 

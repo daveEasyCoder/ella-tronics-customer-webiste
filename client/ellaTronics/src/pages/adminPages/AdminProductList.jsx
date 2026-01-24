@@ -361,7 +361,7 @@ const AdminProductList = () => {
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.src =
-                            "https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Image";
+                            "/imageNotFound.png";
                           e.target.className = "w-full h-full object-contain p-2";
                         }}
                       />

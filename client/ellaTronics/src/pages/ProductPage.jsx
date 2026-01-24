@@ -290,9 +290,10 @@ const ProductPage = () => {
                         src={product.image}
                         alt={product.name}
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                         loading="lazy"
+                        loading="lazy"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60';
+                          e.target.src =
+                            "/imageNotFound.png";
                         }}
                       />
                       {/* Status Badge */}

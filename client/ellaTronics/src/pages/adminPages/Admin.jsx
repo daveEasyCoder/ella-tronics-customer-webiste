@@ -51,7 +51,7 @@ const Admin = () => {
     }
     return (
         <>
-            <div className={`w-18 sm:w-55 bg-white h-[100vh] shadow-lg fixed ${isSidebarOpen ? 'left-0' : '-left-20'} z-10 transition-all duration-150 sm:left-0 top-0 `}>
+            <div className={`w-18 sm:w-55 bg-white h-screen shadow-lg fixed ${isSidebarOpen ? 'left-0' : '-left-20'} z-10 transition-all duration-150 sm:left-0 top-0 `}>
                 <div className="pl-7 py-3.5 border-b border-b-gray-200">
                     <h1 className="text-xl font-bold text-blue-600 flex items-center gap-2">
                         <span className=''>Admin</span>

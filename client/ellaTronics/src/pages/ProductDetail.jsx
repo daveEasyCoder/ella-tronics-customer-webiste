@@ -40,7 +40,7 @@ const ProductDetail = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         const storedProducts = localStorage.getItem("products");
-     
+
         if (storedProducts) {
             setLoading(true)
             const products = JSON.parse(storedProducts);
@@ -52,9 +52,9 @@ const ProductDetail = () => {
                 setActiveImage(foundProduct.image);
                 setLoading(false)
             } else {
-               fetchProductDetails()
+                fetchProductDetails()
             }
-        }else{
+        } else {
             fetchProductDetails()
         }
     }, [id]);
@@ -223,10 +223,10 @@ const ProductDetail = () => {
                                     src={activeImage}
                                     alt={product.name}
                                     className="w-full h-full object-contain p-8"
-                                     loading="lazy"
+                                    loading="lazy"
                                     onError={(e) => {
-                                        e.target.src = 'https://via.placeholder.com/800x600/4F46E5/FFFFFF?text=Product+Image';
-                                        e.target.className = 'w-full h-full object-cover';
+                                        e.target.src =
+                                            "/imageNotFound.png";
                                     }}
                                 />
                                 <div className="absolute top-4 right-4">

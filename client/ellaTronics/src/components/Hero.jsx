@@ -83,7 +83,7 @@ const Hero = () => {
 
             {/* Text content */}
             <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-6">
-              <h1 className="exo-texts text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-fadeIn">
+              <h1 className="exo-texts text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg animate-fadeIn">
                 <span className='text-cyan-400'>{slide.titlePart1}</span> {slide.titlePart2} <br /> {slide.titlePart3}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-white mb-8 drop-shadow-md max-w-2xl animate-slideUp">

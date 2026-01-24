@@ -21,7 +21,7 @@ const AboutUsSimple = () => {
                     {/* Left - Visual Section */}
                     <div className="relative">
                         <div className="bg-linear-to-br from-blue-500 to-purple-600 rounded aspect-square flex items-center justify-center">
-                            <img className='w-full h-full rounded hover:-rotate-2 transition-transform duration-150' src="/aboutImg.jpg" alt="image not found" />
+                            <img className='w-full h-full rounded -rotate-2 transition-transform duration-150' loading='lazy' src="/aboutImg.jpg" alt="image not found" />
                         </div>
                     </div>
 

@@ -42,10 +42,7 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-4">Stay Connected</h3>
           <p className="text-gray-400 mb-4">Subscribe to our newsletter for updates & offers.</p>
-          <form className="flex mb-4">
-            <input type="email" placeholder="Your email" className="p-2 rounded-l bg-gray-800 border border-gray-700 focus:outline-none flex-1 text-white" />
-            <button type="submit" className="bg-blue-600 p-2 rounded-r hover:bg-blue-700 transition">Subscribe</button>
-          </form>
+  
           <div className="flex gap-4 mt-2">
             <a href="#"><FaFacebookF size={20} className="hover:text-white" /></a>
             <a href="#"><FaTwitter size={20} className="hover:text-white" /></a>
