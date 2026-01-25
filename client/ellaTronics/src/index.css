@@ -87,3 +87,8 @@ body{
 .animate-slideUp {
   animation: slideUp 1s ease-out 0.3s both;
 }
+
+
+.testimonial-container::-webkit-scrollbar{
+   display: none;
+}

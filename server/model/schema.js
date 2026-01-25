@@ -9,8 +9,8 @@ const productSchema = new mongoose.Schema(
     color: { type: String, trim: true, default: "" },
     location: { type: String, required: true, trim: true },
     contact1: { type: String, required: true, trim: true },
-    contact2: { type: String, trim: true,default: "" },
-    telegram: { type: String, trim: true,default:"" },
+    contact2: { type: String, trim: true, default: "" },
+    telegram: { type: String, trim: true, default: "" },
     status: { type: String, enum: ["available", "sold"], default: "available" },
   },
   { timestamps: true }
@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    phone: { type: String, required: true, unique: true },
     password: { type: String, required: true },
   },
   { timestamps: true }
@@ -31,4 +32,33 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", userSchema);
 
-export { Product, User };
+// --------- Testimonial Schema (Service-level) ---------
+const testimonialSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true, 
+      trim: true,
+    },
+    message: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+      default: 5,
+    },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+const Testimonial = mongoose.model("Testimonial", testimonialSchema);
+
+export { Product, User,Testimonial };

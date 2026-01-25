@@ -24,6 +24,7 @@ const Admin = () => {
         { name: "Dashboard", path: "dashboard", icon: <LayoutDashboard className="w-5 h-5" /> },
         { name: "Create Item", path: "create-product", icon: <PackagePlus className="w-5 h-5" /> },
         { name: "Products", path: "product-list", icon: <FaList className="w-5 h-5" /> },
+        { name: "Testimonials", path: "testimonials", icon: <ShieldCheck className="w-5 h-5" /> },
     ];
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);

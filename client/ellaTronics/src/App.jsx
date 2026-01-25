@@ -14,6 +14,7 @@ import Admin from './pages/adminPages/Admin'
 import EditProduct from './pages/adminPages/EditProduct'
 import AdminDashboard from './pages/adminPages/AdminDashboard'
 import ProductPage from './pages/ProductPage'
+import AdminTestimonials from './pages/adminPages/AdminTestimonials'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="admin-product-detail/:id" element={<AdminProductDetail />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="testimonials" element={<AdminTestimonials />} />
         </Route>
       </Routes>
     </>

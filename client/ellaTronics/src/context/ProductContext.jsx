@@ -12,13 +12,13 @@ export const ApiProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [products, setProducts] = useState([]);
   const [adminProducts, setAdminProducts] = useState([]);
-   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
 
 
   // Fetch all products
   const fetchProducts = async () => {
-   
+
     try {
       setLoading(true);
       setError('');
@@ -39,12 +39,21 @@ export const ApiProvider = ({ children }) => {
 
 
   useEffect(() => {
+    const storedProducts = localStorage.getItem("products");
+    if (storedProducts) {
+      try {
+        setProducts(JSON.parse(storedProducts));
+      } catch (e) {
+        console.log("Invalid products in localStorage:", e);
+        localStorage.removeItem("products");
+      }
+    }
     fetchProducts();
   }, []);
 
 
   return (
-    <ApiContext.Provider value={{ BASE_URL, products, loading, error,adminProducts,setAdminProducts,filteredProducts,setFilteredProducts, fetchProducts }}>
+    <ApiContext.Provider value={{ BASE_URL, products, loading, error, adminProducts, setAdminProducts, filteredProducts, setFilteredProducts, fetchProducts }}>
       {children}
     </ApiContext.Provider>
   );
