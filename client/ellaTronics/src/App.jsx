@@ -15,7 +15,8 @@ import AdminDashboard from './pages/adminPages/AdminDashboard'
 import ProductPage from './pages/ProductPage'
 import AdminTestimonials from './pages/adminPages/AdminTestimonials'
 import Login from './pages/Login'
-import Signup from './pages/SignUp'
+import Signup from './pages/Signup'
+
 
 function App() {
 
