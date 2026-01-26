@@ -26,7 +26,7 @@ const ProductList = () => {
         }).format(date);
     };
 
-    if (loading) {
+    if (loading && products?.length === 0) {
         return (
             <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-12 px-4">
                 <div className="max-w-7xl mx-auto">
@@ -84,14 +84,14 @@ const ProductList = () => {
     }
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-12 px-4">
+        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 md:mb-8 py-12 px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center justify-center p-3 bg-linear-to-r from-blue-100 to-indigo-100 rounded-2xl mb-4">
                         <TrendingUp className="h-8 w-8 text-blue-600" />
                     </div>
-                    <h1 className=" text-3xl md:text-5xl font-bold text-gray-900 mb-3">
+                    <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 mb-3">
                         Discover Amazing Products
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -189,7 +189,7 @@ const ProductList = () => {
                                 {/* View Details Button */}
                                 <Link
                                     to={`/product-detail/${product._id}`}
-                                    className="mt-5 w-full bg-linear-to-r from-blue-600 to-blue-700 text-white font-medium py-3 rounded-lg flex items-center justify-center hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
+                                    className="mt-5 w-full bg-linear-to-r from-blue-600 to-blue-700 text-white font-medium py-3 rounded-lg flex items-center justify-center hover:from-blue-700 hover:to-blue-800 transition-all shadow hover:shadow-lg"
                                 >
                                     <Eye className="h-4 w-4 mr-2" />
                                     View Full Details
