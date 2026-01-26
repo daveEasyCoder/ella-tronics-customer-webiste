@@ -1,7 +1,6 @@
 
 import './App.css'
 import HomePage from './pages/HomePage'
-import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import Navbar from './components/Navbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
@@ -15,6 +14,8 @@ import EditProduct from './pages/adminPages/EditProduct'
 import AdminDashboard from './pages/adminPages/AdminDashboard'
 import ProductPage from './pages/ProductPage'
 import AdminTestimonials from './pages/adminPages/AdminTestimonials'
+import Login from './pages/Login'
+import Signup from './pages/SignUp'
 
 function App() {
 
@@ -29,8 +30,9 @@ function App() {
       {!shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/login' element={<LoginPage />} />  
+        <Route path='/user-login' element={<Login />} />  
+        <Route path='/user-signup' element={<Signup />} />  
         <Route path='/product-detail/:id' element={<ProductDetail />} />
         <Route path='/products' element={<ProductPage />} />
         {/* ADMIN ROUTES */}

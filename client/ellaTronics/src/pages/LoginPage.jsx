@@ -1,6 +1,6 @@
 // src/pages/admin/Login.jsx
-import React, { useState } from 'react';
-import { useNavigate, Navigate, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import {
   Lock,
@@ -30,6 +30,15 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  useEffect(() => {
+    let storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      storedUser = JSON.parse(storedUser)
+    }
+    if (!storedUser || storedUser?.role !== 'admin') {
+      navigate('/user-login');
+    }
+  }, [])
 
 
   const handleChange = (e) => {
@@ -67,11 +76,11 @@ const AdminLogin = () => {
     } catch (err) {
       console.error('Login error:', err);
       if (err.response) {
-          if(err.response?.data?.message){
-            setError( err.response?.data?.message)
-            retrurn;
-          }
-          setError("Error occur during login ")
+        if (err.response?.data?.message) {
+          setError(err.response?.data?.message)
+          retrurn;
+        }
+        setError("Error occur during login ")
       } else {
         setError('Server not responding. Please try again.');
       }

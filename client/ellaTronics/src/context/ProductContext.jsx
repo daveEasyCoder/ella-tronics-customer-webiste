@@ -13,6 +13,8 @@ export const ApiProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [adminProducts, setAdminProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [user, setUser] = useState(null);
+
 
 
 
@@ -53,7 +55,7 @@ export const ApiProvider = ({ children }) => {
 
 
   return (
-    <ApiContext.Provider value={{ BASE_URL, products, loading, error, adminProducts, setAdminProducts, filteredProducts, setFilteredProducts, fetchProducts }}>
+    <ApiContext.Provider value={{ BASE_URL, user,setUser, products, loading, error, adminProducts, setAdminProducts, filteredProducts, setFilteredProducts, fetchProducts }}>
       {children}
     </ApiContext.Provider>
   );

@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import productRoutes from './routes/productRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import testimonialRoutes from './routes/testimonialRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 
 const app = express();
@@ -41,6 +42,7 @@ mongoose.connect(uri).then(() => {
 
 
 // Routes
+app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/testimonials', testimonialRoutes);
