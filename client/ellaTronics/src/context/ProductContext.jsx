@@ -7,7 +7,7 @@ const ApiContext = createContext();
 export const ApiProvider = ({ children }) => {
   const production_url = "https://ella-tronics-backend.onrender.com";
   const development_url = "http://localhost:3004";
-  const BASE_URL = development_url
+  const BASE_URL = production_url
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [products, setProducts] = useState([]);
