@@ -131,7 +131,7 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-8">
+    <div className="min-h-screen bg-gray-50 py-8 px-2 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -279,7 +279,7 @@ const ProductPage = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-6">
                 {filteredProducts.map((product) => (
                   <ProductItem product = {product} />
                 ))}
