@@ -2,16 +2,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Profile = ({ user }) => {
+const Profile = ({ user,handleLogout }) => {
     const [isOpen, setIsopen] = useState(false)
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        navigate('/');
-    }
     return (
-        <div className="flex items-center space-x-2">
+        <div className="relative flex items-center space-x-2">
             <div onClick={() => setIsopen(prev => !prev)} className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
                 {user?.name?.charAt(0).toUpperCase()}
             </div>
