@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProductContext } from '../context/ProductContext';
+import ProductItem from '../components/ProductItem';
 
 const ProductList = () => {
     const { products, loading, error } = useProductContext();
@@ -84,7 +85,7 @@ const ProductList = () => {
     }
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 md:mb-8 py-12 px-4">
+        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 md:mb-8 py-12 px-2 lg:px-4">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -110,92 +111,9 @@ const ProductList = () => {
                 </div>
 
                 {/* Product Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4">
                     {products?.slice(0, 8).map((product) => (
-                        <div
-                            key={product._id}
-                            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-100"
-                        >
-                            {/* Product Image Container */}
-                            <div className="relative h-64 overflow-hidden">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        e.target.src =
-                                            "/imageNotFound.png";
-                                    }}
-                                />
-
-                                {/* Status Badge */}
-                                <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold ${product.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                    {product.status === 'available' ? 'Available' : 'Sold'}
-                                </div>
-
-                                {/* Price Tag Overlay */}
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm">
-                                    <div className="text-lg font-bold text-blue-600 flex items-center">
-                                        <span>{product.price} ETB</span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* Product Info - Simplified */}
-                            <div className="p-6">
-                                {/* Product Name */}
-                                <div className="mb-4">
-                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-2">
-                                        {product.name}
-                                    </h3>
-
-                                    {/* Category/Location Row */}
-                                    <div className="flex items-center justify-between">
-                                        {/* Location */}
-                                        <div className="flex items-center text-gray-600">
-                                            <MapPin className="h-4 w-4 mr-1.5" />
-                                            <span className="text-sm font-medium">{product.location}</span>
-                                        </div>
-
-                                        {/* Color Indicator (if available) */}
-                                        {product.color && (
-                                            <div className="flex items-center">
-                                                <div
-                                                    className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
-                                                    style={{ backgroundColor: product.color.toLowerCase() }}
-                                                    title={`Color: ${product.color}`}
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Posted Date */}
-                                <div className="border-t border-gray-100 pt-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center text-gray-400 text-xs">
-                                            <Package className="h-3 w-3 mr-1.5" />
-                                            <span className="font-medium">Listed</span>
-                                        </div>
-                                        <div className="flex items-center text-gray-400 text-xs">
-                                            <Calendar className="h-3 w-3 mr-1.5" />
-                                            <span>{formatDate(product.createdAt)}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* View Details Button */}
-                                <Link
-                                    to={`/product-detail/${product._id}`}
-                                    className="mt-5 w-full bg-linear-to-r from-blue-600 to-blue-700 text-white font-medium py-3 rounded-lg flex items-center justify-center hover:from-blue-700 hover:to-blue-800 transition-all shadow hover:shadow-lg"
-                                >
-                                    <Eye className="h-4 w-4 mr-2" />
-                                    View Full Details
-                                </Link>
-                            </div>
-                        </div>
+                      <ProductItem product={product} />
                     ))}
                 </div>
 
